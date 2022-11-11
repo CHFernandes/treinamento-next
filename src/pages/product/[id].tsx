@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { NextSeo, ProductJsonLd } from 'next-seo'
 import Image from 'next/future/image'
 import Head from 'next/head'
 import { useState } from 'react'
@@ -46,9 +47,39 @@ export default function Product({ product }: ProductProps) {
 
   return (
     <>
-      <Head>
-        <title>{product.name} | Training Shop</title>
-      </Head>
+      <NextSeo
+        title={`${product.name} | Training Shop`}
+        description={product.description}
+        openGraph={{
+          type: 'og:product',
+          title: `${product.name} | Training Shop`,
+          description: product.description,
+          images: [
+            {
+              url: product.imageUrl,
+              alt: product.name,
+            },
+          ],
+        }}
+        additionalMetaTags={[
+          {
+            property: 'product:price:amount',
+            content: product.price,
+          },
+          {
+            property: 'product:price:currency',
+            content: 'BLR',
+          },
+        ]}
+      />
+
+      <ProductJsonLd
+        productName={product.name}
+        description={product.description}
+        sku={product.id}
+        offers={{ price: product.price, currency: 'BLR' }}
+      />
+
       <ProductContainer>
         <ImageContainer>
           <Image src={product.imageUrl} width={520} height={480} alt='' />

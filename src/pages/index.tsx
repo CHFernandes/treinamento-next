@@ -6,6 +6,7 @@ import { GetStaticProps } from 'next'
 import Stripe from 'stripe'
 import Link from 'next/link'
 import Head from 'next/head'
+import { NextSeo } from 'next-seo'
 
 interface Product {
   id: string
@@ -21,9 +22,15 @@ interface HomeProps {
 export default function Home({ products }: HomeProps) {
   return (
     <>
-      <Head>
-        <title>Home | Training Shop</title>
-      </Head>
+      <NextSeo
+        title='Home | Training Shop'
+        description='Home'
+        openGraph={{
+          type: 'website',
+          title: 'Home | Training Shop',
+          description: 'Home',
+        }}
+      />
 
       <HomeContainer>
         {products.map(product => (

@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next'
+import { NextSeo } from 'next-seo'
 import Image from 'next/future/image'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -17,11 +18,17 @@ interface SuccessProps {
 export default function Success({ customerName, product }: SuccessProps) {
   return (
     <>
-      <Head>
-        <title>Compra Efetuada | Training Shop</title>
-
-        <meta name='robots' content='noindex' />
-      </Head>
+      <NextSeo
+        title='Compra Efetuada | Training Shop'
+        description='Compra Efetuada'
+        nofollow
+        noindex
+        openGraph={{
+          type: 'website',
+          title: 'Compra Efetuada | Training Shop',
+          description: 'Compra Efetuada',
+        }}
+      />
       <SuccessContainer>
         <h1>Compra Efetuada</h1>
 
